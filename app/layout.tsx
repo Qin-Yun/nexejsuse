@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,57 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        {/* 固定导航栏 */}
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-lg border-b border-gray-200 dark:border-gray-700">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between h-16">
+              <div className="flex items-center">
+                <Link href="/" className="flex-shrink-0 flex items-center">
+                  <span className="text-xl font-bold text-gray-900 dark:text-white">
+                    Next.js 学习应用
+                  </span>
+                </Link>
+              </div>
+              <div className="flex items-center space-x-8">
+                <Link 
+                  href="/" 
+                  className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  首页
+                </Link>
+                <Link 
+                  href="/about" 
+                  className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  关于
+                </Link>
+                <Link 
+                  href="/examples" 
+                  className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  使用例子
+                </Link>
+                <Link 
+                  href="/blog" 
+                  className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  技术博客
+                </Link>
+                <Link 
+                  href="/help" 
+                  className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  帮助
+                </Link>
+              </div>
+            </div>
+          </div>
+        </nav>
+        
+        {/* 主要内容 - 添加顶部边距避免被固定导航栏遮挡 */}
+        <main className="pt-16">
+          {children}
+        </main>
       </body>
     </html>
   );
